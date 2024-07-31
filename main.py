@@ -1,14 +1,14 @@
-from flask import Flask
+from flask import Flask , render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "<p>Ola, mundo !</p>"
+    return render_template('home.html')#render retorna tudo da pagina home.html
 
 @app.route("/contato")
 def contato():
-    return "<h1>Entre em contato com a gente vieiralmeida@gmail.com!</h1>"
+    return render_template('contato.html')
 
 
 if __name__ == "__main__":
