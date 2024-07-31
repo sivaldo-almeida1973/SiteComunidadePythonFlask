@@ -8,7 +8,7 @@ def home():
 
 @app.route("/contato")
 def contato():
-    return "<p>Entre em contato com a gente vieiralmeida@gmail.com!</p>"
+    return "<h1>Entre em contato com a gente vieiralmeida@gmail.com!</h1>"
 
 
 if __name__ == "__main__":
