@@ -4,6 +4,11 @@ app = Flask(__name__)
 
 lista_usuarios = ['Lucas','Lice','Sivaldo','Vanusa','Gute']
 
+app.config['SECRET_KEY'] = '4c3d52b66f6fa4b91148674a18888e92'
+#import secrets
+#secrets.token_hex(16)
+
+
 @app.route('/')
 def home():
     return render_template('home.html')#render retorna tudo da pagina home.html
