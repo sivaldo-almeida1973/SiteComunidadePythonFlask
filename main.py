@@ -17,5 +17,10 @@ def contato():
 def usuarios():                         #o primeiro paramentro( lista_usuarios) vai para a pagina html
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)#o segundo é a variavel da lista
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
