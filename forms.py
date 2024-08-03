@@ -20,5 +20,5 @@ class FormaLogin(FlaskForm):
 
 
 
-    #
+    #para exibir tem que import no main.py e incluir na funcao login()
 

@@ -1,4 +1,5 @@
 from flask import Flask , render_template, url_for
+from forms import  FormaLogin, FormCriarConta
 
 app = Flask(__name__)
 
@@ -24,7 +25,9 @@ def usuarios():                         #o primeiro paramentro( lista_usuarios) 
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    form_login = FormaLogin()  #criar instancias e passa
+    form_criaConta =  FormCriarConta()      #depois disso jogar para dentro do site no login.html
+    return render_template('login.html', form_login=form_login, form_criarConta=form_criaConta)
 
 
 if __name__ == "__main__":
