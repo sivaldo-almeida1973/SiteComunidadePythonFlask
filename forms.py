@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
-class FormCriarConta(FlaskForm):
+class FormCriarConta(FlaskForm):   #formulario de criar conta
     username = StringField("Nome do Usuário", validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     senha = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
@@ -11,9 +11,10 @@ class FormCriarConta(FlaskForm):
     botao_submit_criarConta = SubmitField('Criar Conta')
 
 
-class FormaLogin(FlaskForm):
+class FormaLogin(FlaskForm):   #formulario de Login
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     senha = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
+    lembrar_dados = BooleanField('Lembrar dados de acesso')
     botao_submit_login = SubmitField('Fazer Login')
 
 
