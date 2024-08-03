@@ -23,7 +23,7 @@ def contato():
 def usuarios():                         #o primeiro paramentro( lista_usuarios) vai para a pagina html
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)#o segundo é a variavel da lista
 
-@app.route('/login') #pagina de login
+@app.route('/login', methods=['GET', 'POST']) #pagina de login
 def login():
     form_login = FormaLogin()  #criar instancias e passa
     form_criaConta =  FormCriarConta()      #depois disso jogar para dentro do site no login.html
