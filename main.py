@@ -30,12 +30,12 @@ def login():
 
     if form_login.validate_on_submit() and 'botao_submit_login' in request.form:  #validando formularios
         #fez login com sucesso exibir msg de login bem sucedido
-        flash(f'Login feito com sucesso! {form_login.email.data}', 'alert-success')# data -e o que foi preenchido no campo email
+        flash(f'Login feito com sucesso no e-mail:! {form_login.email.data}','alert-success')# data -e o que foi preenchido no campo email
         #redirecionar para homepage  (importar flash, redirect)
         return redirect(url_for('home'))
 
     if form_criarConta.validate_on_submit() and 'botao_submit_criarConta' in request.form:
-         flash(f'Conta criada para o email! {form_criarConta.email.data}',  'alert-success')
+         flash(f'Conta criada para o email: {form_criarConta.email.data}',  'alert-success')
         #criou conta com sucesso
          #redireciona , depois disso ajeita no base.html para exibir msg
          return redirect(url_for('home'))
