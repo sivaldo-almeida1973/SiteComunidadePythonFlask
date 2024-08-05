@@ -1,13 +1,18 @@
 from flask import Flask , render_template, url_for, request, flash, redirect
 from forms import  FormaLogin, FormCriarConta
+from flask_sqlalchemy import SQLAlchemy  #import banco de dados
 
 app = Flask(__name__)
 
 lista_usuarios = ['Lucas','Lice','Sivaldo','Vanusa','Gute']
-
+#import secrets  #secrets.token_hex(16)
 app.config['SECRET_KEY'] = '4c3d52b66f6fa4b91148674a18888e92'   # chave de segurança
-#import secrets
-#secrets.token_hex(16)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite3:///comunidade-db'  #onde fica banco de dados(local)
+
+#criar instancia banco de dados
+database = SQLAlchemy(app)
+
+
 
 
 @app.route('/')   #pagina de inicio
