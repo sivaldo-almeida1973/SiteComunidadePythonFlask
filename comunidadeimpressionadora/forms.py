@@ -1,7 +1,8 @@
+#formularios
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
-
+from comunidadeimpressionadora.models import Usuarios
 
 class FormCriarConta(FlaskForm):   #formulario de criar conta
     username = StringField("Nome do Usuário", validators=[DataRequired()])
@@ -9,6 +10,11 @@ class FormCriarConta(FlaskForm):   #formulario de criar conta
     senha = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
     confirmacao_senha = PasswordField('Confirmação de senha', validators=[DataRequired(), EqualTo('senha')])
     botao_submit_criarConta = SubmitField('Criar Conta')
+
+    def validate_email(self, email):
+        usuario = Usuarios.query.filter_by(email=email.data).first()
+        if usuario:
+            return ValueError("E-mail já cadastrado, faça login para continuar")
 
 
 class FormaLogin(FlaskForm):   #formulario de Login
@@ -21,5 +27,5 @@ class FormaLogin(FlaskForm):   #formulario de Login
 
 
 
-    #para exibir tem que import no main.py e incluir na funcao login()
+
 

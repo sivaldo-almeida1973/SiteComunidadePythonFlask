@@ -1,10 +1,14 @@
 #criar tabela do banco de dados
-from main import database
+from comunidadeimpressionadora import database, login_manager  #importa do __init__
 from datetime import datetime
+from flask_login import UserMixin
 
+@login_manager.user_loader
+def load_usuario(id_usuario):
+    return Usuarios.query.get(int(id_usuario))
 
 #tabela usuarios
-class Usuarios(database.Model):  #Model é uma classe do flask
+class Usuarios(database.Model, UserMixin):  #Model é uma classe do flask
     id = database.Column(database.Integer, primary_key=True)
     username = database.Column(database.String, nullable=False)
     email = database.Column(database.String, nullable=False, unique=True)

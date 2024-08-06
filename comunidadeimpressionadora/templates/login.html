@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h1>Faça Login para Continuar</h1>
+    <hr>
+    <div class="row">
+        <div class="col">
+              <!--formulario login-->
+            <form method="post" action="" class="border p-4 mt-2" novalidate>
+                {{ form_login.csrf_token }}   <!--mensagem de alerta-->
+                <legend>Login</legend>
+                <fieldset>
+                    <div class="form-group">
+                        {{ form_login.email.label(class="form-control-label") }}
+                        {% if form_login.email.errors %}   <!--se tiver algum erro -->
+                           {{ form_login.email(class="form-control is-invalid") }}  <!--caixa de formulario vai ficar vermelha-->
+                         <div class="invalid-feedback">  <!--exibe os erros formatado com bootstrat -->
+                           {% for erro in form_login.email.errors %}  <!--fazer um for para cada erro-->
+                               {{ erro }}
+                           {% endfor %}
+                         </div>
+                        {% else %}  <!--caso contrario exibe a caixa normalmente-->
+                             {{ form_login.email(class="form-control") }}<!--caixa de formulario-->
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form_login.senha.label(class="form-control-label") }}
+                        {% if form_login.senha.errors %}   <!--se tiver algum erro -->
+                           {{ form_login.senha(class="form-control is-invalid") }}  <!--caixa de formulario vai ficar vermelha-->
+                         <div class="invalid-feedback">  <!--exibe os erros formatado com bootstrat -->
+                           {% for erro in form_login.senha.errors %}  <!--fazer um for para cada erro-->
+                               {{ erro }}
+                           {% endfor %}
+                         </div>
+                        {% else %}  <!--caso contrario exibe a caixa normalmente-->
+                             {{ form_login.senha(class="form-control") }}<!--caixa de formulario-->
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form_login.lembrar_dados.label(class="form-check-label") }}
+                        <br>
+                        {{ form_login.lembrar_dados(class="form-check-input mx-1") }}
+                    </div>
+                </fieldset>
+                 <hr>
+                {{ form_login.botao_submit_login(class="btn btn-primary mt-2") }}
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
