@@ -1,10 +1,7 @@
 from main import app, database
 from models import Usuarios, Post
 
-# O contexto da aplicação é necessário para que o SQLAlchemy possa acessar a configuração do banco de dados.
-# with app.app_context():
-#     # Cria todas as tabelas definidas nos modelos importados (Usuarios e Post).
-#     database.create_all()
+
 
 #criar usuario
 # with app.app_context():
@@ -37,12 +34,17 @@ from models import Usuarios, Post
 #     database.session.add(meu_post)
 #     database.session.commit()
 
+# with app.app_context():
+#     post = Post.query.first()
+#     print(post.titulo)
+#     print(post.autor.email)
+#     print(post.autor.username)
+
+
+
+
+# O contexto da aplicação é necessário para que o SQLAlchemy possa acessar a configuração do banco de dados.
 with app.app_context():
-    post = Post.query.first()
-    print(post.titulo)
-    print(post.autor.email)
-    print(post.autor.username)
-
-
-
-
+    database.drop_all()  #deletar tudo que foi criado acima
+#     # Cria todas as tabelas definidas nos modelos importados (Usuarios e Post).
+    database.create_all()
