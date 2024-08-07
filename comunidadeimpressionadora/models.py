@@ -12,7 +12,7 @@ class Usuarios(database.Model, UserMixin):  #Model é uma classe do flask
     id = database.Column(database.Integer, primary_key=True)
     username = database.Column(database.String, nullable=False)
     email = database.Column(database.String, nullable=False, unique=True)
-    senha = database.Column(database.String, nullable=False, unique=True)
+    senha = database.Column(database.String, nullable=False)
     foto_perfil = database.Column(database.String, default='default.jpg')
     posts = database.relationship('Post', backref='autor', lazy=True)  #relacao desta tabela com de Post
     cursos = database.Column(database.String, nullable=False, default='Não Informado')
@@ -25,6 +25,7 @@ class Post(database.Model):
      data_criacao =  database.Column(database.DateTime, nullable=False, default=datetime.now)
      id_usuario = database.Column(database.Integer,
                                   database.ForeignKey('usuarios.id'), nullable=False)#relacao desta tabela com de Usuario
+
 
 
 
