@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 app.config['SECRET_KEY'] = 'b80d378ec0e5b92e0af2b623a35c0cac'
 
 database = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+bcrypt = Bcrypt(app) #criar senha criptografada
 login_manager = LoginManager(app)
 login_manager.login_view = "home"
 
