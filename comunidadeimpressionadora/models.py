@@ -3,19 +3,22 @@ from comunidadeimpressionadora import database, login_manager  #importa do __ini
 from datetime import datetime
 from flask_login import UserMixin
 
+
 @login_manager.user_loader
-def load_usuario(id_usuario):
-    return Usuarios.query.get(int(id_usuario))
+def load_usuarios(id_usuarios):
+    return Usuarios.query.get(int(id_usuarios))
 
 #tabela usuarios
-class Usuarios(database.Model, UserMixin):  #Model é uma classe do flask
+class Usuarios(database.Model, UserMixin):
     id = database.Column(database.Integer, primary_key=True)
     username = database.Column(database.String, nullable=False)
     email = database.Column(database.String, nullable=False, unique=True)
-    senha = database.Column(database.String, nullable=False)
+    senha = database.Column(database.String(80), nullable=False)
     foto_perfil = database.Column(database.String, default='default.jpg')
-    posts = database.relationship('Post', backref='autor', lazy=True)  #relacao desta tabela com de Post
+    posts = database.relationship('Post', backref='autor', lazy=True)
     cursos = database.Column(database.String, nullable=False, default='Não Informado')
+
+
 
 #tabela de posts
 class Post(database.Model):
