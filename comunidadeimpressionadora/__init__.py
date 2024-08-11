@@ -17,6 +17,8 @@ login_manager.login_view = "home"
 
 # Inicialize Flask-Migrate
 migrate = Migrate(app, database)
+login_manager.login_view = 'login'  #todos os links que tem login_required  , irá ser direcionado para a pagina de login
+login_manager.login_message_category = 'alert-info'
 
 from comunidadeimpressionadora import routes
 from comunidadeimpressionadora.models import Usuarios  # Adicione esta linha

@@ -17,6 +17,7 @@ def contato():
 
 
 @app.route('/usuarios')  # página de usuários
+@login_required
 def usuarios():  # o primeiro parâmetro (lista_usuarios) vai para a página HTML
     lista_usuarios = Usuarios.query.all()
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)  # o segundo é a variável da lista
@@ -54,7 +55,11 @@ def login():
         if usuario and bcrypt.check_password_hash(usuario.senha, form_login.senha.data):
             login_user(usuario, remember=form_login.lembrar_dados.data)
             flash(f'Login feito com sucesso no e-mail: {form_login.email.data}', 'alert-success')
-            return redirect(url_for('home'))
+            par_next = request.args.get('next') #  Obtém o valor do parâmetro next da URL.
+            if par_next:  # Verifica se par_next tem um valor.
+                return redirect(par_next)  #Redireciona para a URL especificada em par_next se ela existir.
+            else:  #Caso contrário, executa o bloco else
+                return redirect(url_for('home'))  #Redireciona para a página home se par_next não tiver um valor.
         else:
             flash('Falha no Login. E-mail ou Senha Incorretos', 'alert-danger')
     return render_template('login.html', form_login=form_login)
@@ -64,6 +69,7 @@ if __name__ == '__main__':
 
 
 @app.route('/sair')  #importar logout_user
+@login_required
 def sair():
     logout_user()
     flash('Logout feito com sucesso!', 'alert-success')
@@ -71,12 +77,14 @@ def sair():
 
 
 @app.route('/perfil')
+@login_required
 def perfil():
         return render_template('perfil.html')
 
 
 
 @app.route('/post/criar')
+@login_required
 def criar_post():
         return render_template('criarpost.html')
 
