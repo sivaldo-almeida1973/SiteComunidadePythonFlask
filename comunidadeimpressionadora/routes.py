@@ -1,7 +1,7 @@
 #rotas do site(links)
 from flask import render_template, redirect, url_for, flash, request
 from comunidadeimpressionadora import app, database, bcrypt
-from comunidadeimpressionadora.forms import FormLogin, FormCriarConta
+from comunidadeimpressionadora.forms import FormLogin, FormCriarConta, FormEditarPerfil
 from comunidadeimpressionadora.models import Usuarios, Post
 from flask_login import login_required, current_user, login_user, logout_user
 
@@ -88,4 +88,12 @@ def perfil():
 @login_required
 def criar_post():
         return render_template('criarpost.html')
+
+
+@app.route('/perfil/editar', methods=['GET', 'POST']) #funcao de editar perfil
+@login_required
+def editar_perfil():
+    form = FormEditarPerfil()  #chama o formulario na class form
+    foto_perfil = url_for('static', filename='fotos_perfil/{}'.format(current_user.foto_perfil))  #edita foto do perfil
+    return render_template('editar_perfil.html', foto_perfil=foto_perfil, form=form)
 

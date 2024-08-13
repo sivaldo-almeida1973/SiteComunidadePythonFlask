@@ -23,6 +23,10 @@ class FormLogin(FlaskForm):  # Formulário de Login
 
 
 
+class FormEditarPerfil(FlaskForm):  # Formulário de editar perfil
+    username = StringField("Nome do Usuário", validators=[DataRequired()])
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
+    botao_submit_editarperfil = SubmitField('Confirmar Edição')
 
 
 

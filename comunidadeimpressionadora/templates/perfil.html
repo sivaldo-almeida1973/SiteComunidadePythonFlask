@@ -29,12 +29,17 @@
            </div>  <!--fim-->
 
 
-                   <div class="button mt-2 d-flex flex-row align-items-center">
-                    <button class="btn btn-sm btn-outline-primary w-100">Editar Perfil</button>
-                   </div>
+               <div class="w-100" class="button mt-2 d-flex flex-row align-items-center">
+                   <a href="{{ url_for('editar_perfil') }}">  <!--link que direciona para funcao editar perfil que esta no routes-->
+                       <button class="btn btn-sm btn-outline-primary w-100">Editar Perfil</button>
+                   </a>
+               </div>
                 </div>
              </div>
         </div>
    </div>
+{% block form_editar_perfil %}
+
+{% endblock %}
 
 {% endblock %}
