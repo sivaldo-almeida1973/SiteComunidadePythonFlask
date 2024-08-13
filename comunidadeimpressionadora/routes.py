@@ -1,5 +1,7 @@
 #rotas do site(links)
 from flask import render_template, redirect, url_for, flash, request
+from wtforms import ValidationError
+
 from comunidadeimpressionadora import app, database, bcrypt
 from comunidadeimpressionadora.forms import FormLogin, FormCriarConta, FormEditarPerfil
 from comunidadeimpressionadora.models import Usuarios, Post
@@ -44,6 +46,7 @@ def criarConta():
             database.session.rollback()
             flash(f"Erro ao criar conta: {e}", 'alert-danger')
     return render_template('criarconta.html', form_criarConta=form_criarconta)
+
 
 
 
@@ -93,7 +96,16 @@ def criar_post():
 @app.route('/perfil/editar', methods=['GET', 'POST']) #funcao de editar perfil
 @login_required
 def editar_perfil():
-    form = FormEditarPerfil()  #chama o formulario na class form
+    form = FormEditarPerfil()  #criar formulario
+    if form.validate_on_submit(): #logica de mudar perfil
+        current_user.email = form.email.data
+        current_user.username = form.username.data
+        database.session.commit()
+        flash('Perfil atualizado com sucesso!', 'alert-success')
+        return redirect(url_for('perfil'))  #redireciona para pagina de perfil
+    elif request.method == "GET": # preenche o formulario automaticamente
+        form.email.data = current_user.email
+        form.username.data = current_user.username
     foto_perfil = url_for('static', filename='fotos_perfil/{}'.format(current_user.foto_perfil))  #edita foto do perfil
     return render_template('editar_perfil.html', foto_perfil=foto_perfil, form=form)
 
