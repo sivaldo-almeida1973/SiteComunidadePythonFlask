@@ -1,11 +1,13 @@
 #rotas do site(links)
 from flask import render_template, redirect, url_for, flash, request
 from wtforms import ValidationError
-
 from comunidadeimpressionadora import app, database, bcrypt
 from comunidadeimpressionadora.forms import FormLogin, FormCriarConta, FormEditarPerfil
 from comunidadeimpressionadora.models import Usuarios, Post
 from flask_login import login_required, current_user, login_user, logout_user
+import secrets
+import os
+from PIL import Image
 
 lista_usuarios = ['Lucas','Lice','Sivaldo','Vanusa','Gute']
 
@@ -93,6 +95,22 @@ def criar_post():
         return render_template('criarpost.html')
 
 
+def salvar_imagem(imagem):  #essa funcao vai ser chamada dentro do editar_perfil
+     #adicionar um codigo aleatorio no nome da imagem
+     codigo = secrets.token_hex(8)  #criar um codigo para a imagem
+     nome, extensao = os.path.splitext(imagem.filename)  # import os
+     nome_arquivo = nome + codigo + extensao
+     caminho_completo = os.path.join(app.root_path, 'static/fotos_perfil', nome_arquivo)
+     #reduzir o tamanho da imagem(instalar Pillow)
+     tamaho = (200, 200)
+     imagem_reduzida = Image.open(imagem)
+     imagem_reduzida.thumbnail(tamaho)
+     #salvar a imagem na pasta foto_perfil
+     imagem_reduzida.save(caminho_completo)
+     return nome_arquivo
+
+
+
 @app.route('/perfil/editar', methods=['GET', 'POST']) #funcao de editar perfil
 @login_required
 def editar_perfil():
@@ -100,6 +118,9 @@ def editar_perfil():
     if form.validate_on_submit(): #logica de mudar perfil
         current_user.email = form.email.data
         current_user.username = form.username.data
+        if form.foto_perfil.data: #mudar o campo foto_perfil do usuario para o novo nome da imagem
+            nome_imagem = salvar_imagem(form.foto_perfil.data)  #chama funcao salvar_imagem
+            current_user.foto_perfil = nome_imagem
         database.session.commit()
         flash('Perfil atualizado com sucesso!', 'alert-success')
         return redirect(url_for('perfil'))  #redireciona para pagina de perfil
