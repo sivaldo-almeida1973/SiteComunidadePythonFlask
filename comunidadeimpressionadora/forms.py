@@ -29,6 +29,13 @@ class FormEditarPerfil(FlaskForm):  # Formulário de editar perfil
     username = StringField("Nome do Usuário", validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     foto_perfil = FileField('Atualizar Foto de Perfil', validators=[FileAllowed(['jpg', 'png'])])
+    #acrescentamos campos de cursos que sera exibido no editar_perfil
+    curso_excel = BooleanField('Excel Impressionador')
+    curso_vba = BooleanField('VBA Impressionador')
+    curso_powerbi = BooleanField('Power BI Impressionador')
+    curso_python = BooleanField('Python Impressionador')
+    curso_js = BooleanField('JS Impressionador')
+    curso_sql = BooleanField('SQL Impressionado')
     botao_submit_editarperfil = SubmitField('Confirmar Edição')
 
 

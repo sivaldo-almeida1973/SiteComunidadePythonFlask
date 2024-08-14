@@ -46,8 +46,20 @@
                                <span class="text-danger">{{ erro }}</span> <br>
                             {% endfor %}
                         {% endif %}
-
                     </div>
+                    <hr>
+                    <h5>Cursos</h5>
+                     {% for campo in form %}   <!--percorre todos os campos de cursos do FormEditarPerfil-->
+                        {% if 'curso_' in campo.name %}  <!--se tiver curso_ no nome do curso-->
+                            <div class="form-group">   <!--exibe o campos de cursos-->
+
+                                {{ campo(class="form-check-input") }}
+                                {{ campo.label(class="form-check-label ") }}
+                            </div>
+                        {% endif %}
+                     {% endfor %}
+
+
 
                 </fieldset>
                  <hr>

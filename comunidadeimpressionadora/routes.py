@@ -9,7 +9,7 @@ import secrets
 import os
 from PIL import Image
 
-lista_usuarios = ['Lucas','Lice','Sivaldo','Vanusa','Gute']
+# lista_usuarios = ['Lucas','Lice','Sivaldo','Vanusa','Gute']
 
 @app.route('/')   #pagina de inicio
 def home():
@@ -110,17 +110,27 @@ def salvar_imagem(imagem):  #essa funcao vai ser chamada dentro do editar_perfil
      return nome_arquivo
 
 
+def  atualizar_cursos(form):
+    lista_cursos = []
+    # percorrer todos os campos do formulario   FormEditarPerfil
+    for campo in form:
+       if 'curso_' in campo.name:
+           if campo.data:
+               #adicionar o texto do campo.label (Excel Impressionador) na lsita de cursos
+               lista_cursos.append(campo.label.text)
+    return ';' .join(lista_cursos)
 
 @app.route('/perfil/editar', methods=['GET', 'POST']) #funcao de editar perfil
 @login_required
 def editar_perfil():
     form = FormEditarPerfil()  #criar formulario
     if form.validate_on_submit(): #logica de mudar perfil
-        current_user.email = form.email.data
-        current_user.username = form.username.data
-        if form.foto_perfil.data: #mudar o campo foto_perfil do usuario para o novo nome da imagem
+        current_user.email = form.email.data  #atualiza campo de email
+        current_user.username = form.username.data #atualiza campo de usuario
+        if form.foto_perfil.data: #atualiza campo de imagem
             nome_imagem = salvar_imagem(form.foto_perfil.data)  #chama funcao salvar_imagem
             current_user.foto_perfil = nome_imagem
+        current_user.cursos = atualizar_cursos(form)
         database.session.commit()
         flash('Perfil atualizado com sucesso!', 'alert-success')
         return redirect(url_for('perfil'))  #redireciona para pagina de perfil
