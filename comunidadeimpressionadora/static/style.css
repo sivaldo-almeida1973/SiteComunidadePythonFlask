@@ -39,3 +39,12 @@
 .number3{
   font-weight:500;
 }
+
+
+.navbar-custom .navbar-nav .nav-link {
+color: white !important; /* Força a cor branca */
+}
+.navbar-custom .navbar-brand {
+color: white !important; /* Força a cor branca para a marca */
+}
+
