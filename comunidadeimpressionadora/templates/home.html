@@ -2,11 +2,39 @@
 
 {% block body %}
 
-        <div class="container" >
-             <h1>Ola, mundo  Inicio !</h1>
-             <p>Esse site ta ficando legal!</p>
-             <h2>testando novo arquivo</h2>
+        <div class="container-fluid p-5 bg-primary text-white text-center">
+  <h1>My First Bootstrap Page</h1>
+  <p>Resize this responsive page to see the effect!</p>
+</div>
 
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+        <div class="image p-2">
+          <img src="static/fotos_perfil/sivaldo.jpg" class="rounded" width="150">
         </div>
+      <h3>Column 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+       <div class="image p-2">
+          <img src="static/fotos_perfil/sivaldo2.png" class="rounded" width="150">
+        </div>
+      <h3>Column 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+       <div class="image p-2">
+          <img src="static/fotos_perfil/sivaldo-Photoroom.jpg" class="rounded" width="150">
+        </div>
+      <h3>Column 3</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}
