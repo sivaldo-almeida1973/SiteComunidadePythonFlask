@@ -27,7 +27,8 @@ class Post(database.Model):
      corpo =  database.Column(database.Text, nullable=False)
      data_criacao =  database.Column(database.DateTime, nullable=False, default=datetime.now)
      id_usuario = database.Column(database.Integer,
-                                  database.ForeignKey('usuarios.id'), nullable=False)#relacao desta tabela com de Usuario
+                                  database.ForeignKey('usuarios.id'),
+                                  nullable=False)#relacao desta tabela com de Usuario
 
 
 

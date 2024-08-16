@@ -2,9 +2,47 @@
 
 {% block body %}
 
-    <div class="container" >
+ <div class="container" >
+       <div class="row">
+          <div class="col">
+              <!--formulario edita perfil-->
+            <form method="post" action="" class="border p-4 mt-2" enctype="multipart/form-data" novalidate>
+                {{ form.csrf_token }}   <!--mensagem de alerta-->
+                <legend>Criar Post</legend>
+                <fieldset>
+                     <div class="form-group">  <!--titulo vem do forms.py -->
+                        {{ form.titulo.label(class="form-control-label") }}
+                        {% if form.titulo.errors %}   <!--se tiver algum erro -->
+                           {{ form.titulo(class="form-control is-invalid") }}  <!--caixa de formulario vai ficar vermelha-->
+                         <div class="invalid-feedback">  <!--exibe os erros formatado com bootstrat -->
+                           {% for erro in form.titulo.errors %}  <!--fazer um for para cada erro-->
+                               {{ erro }}
+                           {% endfor %}
+                         </div>
+                        {% else %}  <!--caso contrario exibe a caixa normalmente-->
+                             {{ form.titulo(class="form-control") }}<!--caixa de formulario-->
+                        {% endif %}
+                    </div>
 
-         <h1>Criar Post</h1>
+                     <div class="form-group">
+                        {{ form.corpo.label(class="form-control-label") }}
+                        {% if form.corpo.errors %}   <!--se tiver algum erro -->
+                           {{ form.corpo(class="form-control is-invalid") }}  <!--caixa de formulario vai ficar vermelha-->
+                         <div class="invalid-feedback">  <!--exibe os erros formatado com bootstrat -->
+                           {% for erro in form.corpo.errors %}  <!--fazer um for para cada erro-->
+                               {{ erro }}
+                           {% endfor %}
+                         </div>
+                        {% else %}  <!--caso contrario exibe a caixa normalmente-->
+                             {{ form.corpo(class="form-control") }}<!--caixa de formulario-->
+                        {% endif %}
+                    </div>
+                </fieldset>
+                 <hr>
+                {{ form.botao_submit_criarpost(class="btn btn-primary mt-2") }}
+            </form>
+        </div>
     </div>
+ </div>
 
 {% endblock %}

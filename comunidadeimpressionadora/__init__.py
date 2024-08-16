@@ -22,3 +22,7 @@ login_manager.login_message_category = 'alert-info'
 
 from comunidadeimpressionadora import routes
 from comunidadeimpressionadora.models import Usuarios  # Adicione esta linha
+from comunidadeimpressionadora.models import Post
+
+with app.app_context():
+    database.create_all()
