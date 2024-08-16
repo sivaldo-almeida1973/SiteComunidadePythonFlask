@@ -13,7 +13,9 @@ from PIL import Image
 
 @app.route('/')   #pagina de inicio
 def home():
-    return render_template('home.html')#render retorna tudo da pagina home.html
+    #pegar posts do bd
+    posts = Post.query.all()
+    return render_template('home.html', posts=posts)#envia os posts  para pagina home.html
 
 @app.route('/contato')  #pagina de contatos
 def contato():
@@ -93,7 +95,7 @@ def perfil():
 @app.route('/post/criar' ,methods=['GET', 'POST']) #toda classe que tiver um formalario te que ter, methods=['GET', 'POST']
 @login_required
 def criar_post():
-    form = FormCriarPost()  #import o formulario da pasta (forms.py)
+    form = FormCriarPost()  #2 =====import o formulario da pasta (forms.py)
     if form.validate_on_submit():  #validacao
         #criar post dentro do BD(importar o post / do  models.py)
         post = Post(titulo=form.titulo.data, corpo=form.corpo.data, autor=current_user)#usuario atual(current_user)
@@ -101,7 +103,7 @@ def criar_post():
         database.session.commit()
         flash('Post criado com sucesso', 'alert-success')
         return redirect(url_for('home'))  #redireciona para a pagina home
-    return render_template('criarpost.html', form=form)  #apos isso , fazer aparecer no html
+    return render_template('criarpost.html', form=form)  # 3 =====apos isso , fazer aparecer no html
 
 
 def salvar_imagem(imagem):  #essa funcao vai ser chamada dentro do editar_perfil

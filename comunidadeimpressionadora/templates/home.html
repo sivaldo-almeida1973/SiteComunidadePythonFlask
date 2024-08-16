@@ -2,38 +2,32 @@
 
 {% block body %}
 
-<div class="container-fluid p-5 bg-primary text-danger text-center">
-  <h3>My First Bootstrap Page</h3>
-  <p>Resize this responsive page to see the effect!</p>
+<div class="container-fluid p-5 bg-warning text-white text-center">
+  <h3>Comunidade Impressionadora</h3>
+  <p>Alunos , experts e a galera da hashtag em um só lugar</p>
 </div>
+<hr>
 
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-sm-4">
-        <div class="image p-2">
-          <img src="static/fotos_perfil/sivaldo.jpg" class="rounded" width="150">
+
+
+
+       {% for post in posts %}
+     <div class="row  border mt-4 p-3 meupost">
+        <div class="col col-3  ">
+              <div class="image p-2">
+                  <img src="{{ foto_perfil }}" class="rounded" width="150">
+              </div>
         </div>
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-       <div class="image p-2">
-          <img src="static/fotos_perfil/sivaldo2.png" class="rounded" width="150">
+
+        <div class="col col-9" >
+            <h3>{{ post.titulo }}</h3>
+            <p>{{ post.corpo }}</p>
         </div>
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
     </div>
-    <div class="col-sm-4">
-       <div class="image p-2">
-          <img src="static/fotos_perfil/sivaldo-Photoroom.jpg" class="rounded" width="150">
-        </div>
-      <h3>Column 3</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
+      {% endfor %}  <!--exibe os posts-->
+
+
 </div>
 
 
