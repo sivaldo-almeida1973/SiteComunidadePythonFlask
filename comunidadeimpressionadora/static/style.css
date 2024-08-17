@@ -49,3 +49,8 @@ color: white !important; /* Força a cor branca para a marca */
     background: #f2f5f8 !important;
     color: #000 !important;
 }
+
+  .image img {
+    width: 200px; /* Defina a largura desejada */
+    height: 200px; /* Defina a altura desejada */
+    object-fit: cover; /* Garante que a imagem se ajuste ao contêiner */}

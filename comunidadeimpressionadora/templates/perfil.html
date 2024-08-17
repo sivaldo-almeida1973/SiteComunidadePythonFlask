@@ -8,7 +8,7 @@
              <div class="d-flex align-items-center">
 
                     <div class="image p-2">
-                        <img src="{{ foto_perfil }}" class="rounded" width="150">
+                        <img src="{{ foto_perfil }}" class="rounded"  width="180" height="140">
                     </div>
 
                 <div class="ml-3 w-100">
@@ -53,10 +53,7 @@
         {% for curso in current_user.cursos.split(';') %}
              <button type="button" class="btn btn-success mt-2 " disabled>{{ curso }}</button>
         {% endfor %}
-
-
     </div>
-
 </div>
 
 {% block form_editar_perfil %}

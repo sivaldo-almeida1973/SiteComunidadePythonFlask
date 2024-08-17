@@ -8,18 +8,24 @@
 </div>
 <hr>
 
-<div class="container mt-5">
-
-
+<div class="container mt-3">
 
        {% for post in posts %}
      <div class="row  border mt-4 p-3 meupost">
         <div class="col col-3  ">
               <div class="image p-2">
-                  <img src="{{ foto_perfil }}" class="rounded" width="150">
+                  <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded" width="200" >
+                    <strong>{{ post.autor.username }}</strong>
+
+                  <div class="row justify-content-center">
+                        <!--percorre a lista de cursos que o usuario esta escrito e exibe-->
+                        {% for curso in post.autor.cursos.split(';') %}
+                             <button type="button" class="btn btn-success mt-2 btn-block" disabled>{{ curso }}</button>
+                        {% endfor %}
+                </div>
+
               </div>
         </div>
-
         <div class="col col-9" >
             <h3>{{ post.titulo }}</h3>
             <p>{{ post.corpo }}</p>
@@ -27,8 +33,6 @@
     </div>
       {% endfor %}  <!--exibe os posts-->
 
-
 </div>
-
 
 {% endblock %}

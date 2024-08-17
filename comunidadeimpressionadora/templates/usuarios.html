@@ -5,13 +5,13 @@
         <h1>Usuários</h1>
         {% for usuario in lista_usuarios %}
 
-        <div class="container mt-5 d-flex justify-content-center">
-            <div class="card p-2">
+        <div class="container mt-4 d-flex justify-content-center">
+            <div class="card p-1">
                  <div class="d-flex align-items-center">
-                        <div class="image p-2">    <!--exibe a imagem dos usuarios-->
-                            <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(usuario.foto_perfil)) }}" class="rounded" width="155">
+                        <div class="image p-1">    <!--exibe a imagem dos usuarios-->
+                            <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(usuario.foto_perfil)) }}" class="rounded"  width="180" height="140">
                         </div>
-                    <div class="ml-3 w-100">
+                    <div class="ml-2 w-100">
                        <h4 class="mb-0 mt-0">{{ usuario.username }}</h4><span>{{ usuario.email }} </span>
                <div class="p-2 mt-2 mb-2 bg-info d-flex justify-content-between rounded text-white stats">  <!--inicio-->
                    {% if 'Não Informado' in usuario.cursos %}
@@ -33,11 +33,11 @@
   </div>
 
 <div class="row justify-content-center">
-    <div class="col col-4 pt-2" style="text-align: center" >
+    <div class="col col-3 pt-2" style="text-align: center" >
         <strong>Cursos</strong> <br>
         <!--percorre a lista de cursos que o usuario esta escrito e exibe-->
         {% for curso in usuario.cursos.split(';') %}
-             <button type="button" class="btn btn-success mt-2 " disabled>{{ curso }}</button>
+             <button type="button" class="btn btn-success mt-2 btn-block  " disabled>{{ curso }}</button>
         {% endfor %}
 
 

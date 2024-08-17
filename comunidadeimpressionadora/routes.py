@@ -14,7 +14,7 @@ from PIL import Image
 @app.route('/')   #pagina de inicio
 def home():
     #pegar posts do bd
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.id.desc())#ordena os posts em ordem decrescente
     return render_template('home.html', posts=posts)#envia os posts  para pagina home.html
 
 @app.route('/contato')  #pagina de contatos
