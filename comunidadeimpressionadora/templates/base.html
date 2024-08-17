@@ -9,7 +9,13 @@
     {% endblock %}
 </head>
 <body>
+
     {% include 'navbar.html' %}
+       <div class="container-fluid p-5 bg-warning text-white text-center">
+  <h3>Comunidade Impressionadora</h3>
+  <p>Alunos , experts e a galera da hashtag em um só lugar</p>
+</div>
+<hr>
     <div class="container">
         {% with mensagens = get_flashed_messages(with_categories=True) %}
             {% if mensagens %}
