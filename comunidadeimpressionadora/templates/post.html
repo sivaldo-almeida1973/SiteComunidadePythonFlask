@@ -19,10 +19,19 @@
 
               </div>
         </div>
-                <div class="col col-9" >
-                    <h3>{{ post.titulo }}</h3>
-                    <p>{{ post.corpo }}</p>
-                </div>
+        <div class="col col-9" >
+            <h3>{{ post.titulo }}
+                  <small class="text-muted fs-6"> - Data de Criação:{{ post.data_criacao.strftime('%d/%m/%Y') }}
+                   {% if form %}   <!--só vai aparecer se for dono do post-->
+                       <!--esse id esta no formulario abaixo-->
+                      - <a href="#form_editarpost"> Editar Post</a> /
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#ExcluirPost">Exluir Post</a>
+                    {% endif %}
+                  </small>
+
+           </h3>
+            <p>{{ post.corpo }}</p>
+        </div>
     </div>
 </div>
  <!--se existir um post e o usuario for o autor, exibe o formulario,
@@ -32,7 +41,8 @@
        <div class="row">
           <div class="col">
               <!--formulario de Post 4---------------------->
-            <form method="post" action="" class="border p-4 mt-2" enctype="multipart/form-data" novalidate>
+              <!--id vai -->
+            <form id="form_editarpost" method="post" action="" class="border p-4 mt-2" enctype="multipart/form-data" novalidate>
                 {{ form.csrf_token }}   <!--mensagem de alerta-->
                 <legend>Editar Post</legend>
                 <fieldset>
@@ -72,5 +82,24 @@
  </div>
 
 {% endif %}
+
+<!-- Modal -->
+<div class="modal fade" id="ExcluirPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
