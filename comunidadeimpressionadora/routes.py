@@ -151,3 +151,22 @@ def editar_perfil():
     foto_perfil = url_for('static', filename='fotos_perfil/{}'.format(current_user.foto_perfil))  #edita foto do perfil
     return render_template('editar_perfil.html', foto_perfil=foto_perfil, form=form)
 
+
+@app.route('/post/<post_id>', methods=['GET', 'POST'] )
+@login_required  #so permite acessar o post se estiver logado
+def exibir_post(post_id):
+    post = Post.query.get(post_id)
+    if current_user == post.autor: # se o usuario atual, for igual ao autor do post
+        form =  FormCriarPost()# exibe um formulario
+        if request.method == 'GET': #logica que preenche form automaticamente
+            form.titulo.data = post.titulo #está pegando o valor do título de um objeto post e atribuindo-o ao campo titulo do formulário form.
+            form.corpo.data = post.corpo
+        elif form.validate_on_submit():
+            post.titulo = form.titulo.data
+            post.corpo = form.corpo.data
+            database.session.commit()
+            flash('Post atualizado com sucesso', 'alert-success')
+            return redirect(url_for('home'))
+    else:
+        form = None  #vazio
+    return render_template('post.html', post=post, form=form)

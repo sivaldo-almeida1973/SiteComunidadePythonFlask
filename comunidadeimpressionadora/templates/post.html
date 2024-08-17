@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+  <!--pagina para exibir um post individual-->
+<div class="container mt-3">
+     <div class="row  border mt-4 p-3 meupost">
+        <div class="col col-3  ">
+              <div class="image p-2">
+                  <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded" width="200" >
+                    <strong>{{ post.autor.username }}</strong>
+
+                  <div class="row justify-content-center">
+                        <!--percorre a lista de cursos que o usuario esta escrito e exibe-->
+                        {% for curso in post.autor.cursos.split(';') %}
+                             <button type="button" class="btn btn-success mt-2 btn-block" disabled>{{ curso }}</button>
+                        {% endfor %}
+                </div>
+
+              </div>
+        </div>
+                <div class="col col-9" >
+                    <h3>{{ post.titulo }}</h3>
+                    <p>{{ post.corpo }}</p>
+                </div>
+    </div>
+</div>
+ <!--se existir um post e o usuario for o autor, exibe o formulario,
+  continuacao da logica no def exibir_post(post_id): no routes-->
+{% if form %}
+  <div class="container" >
+       <div class="row">
+          <div class="col">
+              <!--formulario de Post 4---------------------->
+            <form method="post" action="" class="border p-4 mt-2" enctype="multipart/form-data" novalidate>
+                {{ form.csrf_token }}   <!--mensagem de alerta-->
+                <legend>Editar Post</legend>
+                <fieldset>
+                     <div class="form-group">  <!--titulo vem do forms.py -->
+                        {{ form.titulo.label(class="form-control-label") }}
+                        {% if form.titulo.errors %}   <!--se tiver algum erro -->
+                           {{ form.titulo(class="form-control is-invalid") }}  <!--caixa de formulario vai ficar vermelha-->
+                         <div class="invalid-feedback">  <!--exibe os erros formatado com bootstrat -->
+                           {% for erro in form.titulo.errors %}  <!--fazer um for para cada erro-->
+                               {{ erro }}
+                           {% endfor %}
+                         </div>
+                        {% else %}  <!--caso contrario exibe a caixa normalmente-->
+                             {{ form.titulo(class="form-control") }}<!--caixa de formulario-->
+                        {% endif %}
+                    </div>
+
+                     <div class="form-group">
+                        {{ form.corpo.label(class="form-control-label") }}
+                        {% if form.corpo.errors %}   <!--se tiver algum erro -->
+                           {{ form.corpo(class="form-control is-invalid") }}  <!--caixa de formulario vai ficar vermelha-->
+                         <div class="invalid-feedback">  <!--exibe os erros formatado com bootstrat -->
+                           {% for erro in form.corpo.errors %}  <!--fazer um for para cada erro-->
+                               {{ erro }}
+                           {% endfor %}
+                         </div>
+                        {% else %}  <!--caso contrario exibe a caixa normalmente-->
+                             {{ form.corpo(class="form-control") }}<!--caixa de formulario-->
+                        {% endif %}
+                    </div>
+                </fieldset>
+                 <hr>
+                {{ form.botao_submit_criarpost(class="btn btn-primary mt-2") }}
+            </form>
+        </div>
+    </div>
+ </div>
+
+{% endif %}
+
+{% endblock %}
