@@ -19,6 +19,9 @@ class Usuarios(database.Model, UserMixin):
     cursos = database.Column(database.String, nullable=False, default='Não Informado')
 
 
+    def contar_posts(self):
+        return len(self.posts) #conta qtde de posts do usuario
+
 
 #tabela de posts
 class Post(database.Model):

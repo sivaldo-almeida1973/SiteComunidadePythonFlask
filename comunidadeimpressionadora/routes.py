@@ -17,8 +17,15 @@ def home():
     posts = Post.query.order_by(Post.id.desc())#ordena os posts em ordem decrescente
     return render_template('home.html', posts=posts)#envia os posts  para pagina home.html
 
-@app.route('/contato')  #pagina de contatos
+@app.route('/contato', methods=['GET', 'POST'])
 def contato():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+        # Lógica para processar a mensagem
+        flash('Mensagem enviada com sucesso!', 'success')
+        return redirect(url_for('contato'))
     return render_template('contato.html')
 
 
